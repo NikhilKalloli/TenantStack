@@ -48,16 +48,55 @@ This integration allows each tenant to have a fully-featured content management 
 
 ## Setup and Installation
 
-1. Ensure you have Docker and Docker Compose installed.
-2. Clone the repository:   ```
+1. Clone the repository:   ```
    git clone https://github.com/your-username/tenantstack-hub.git
    cd tenantstack-hub   ```
-3. Copy `.env.example` to `.env` and fill in the required values.
-4. Run the setup script:   ```
+
+2. Run the setup script:   ```
    npm run setup   ```
-5. Start the services:   ```
-   npm run start   ```
 
-## Running the Project
+3. Update the `.env` file with your actual values.
 
-To start all services:
+## Testing
+
+To test the individual packages:
+
+1. API Service:   ```
+   cd packages/api
+   npm install
+   npm test   ```
+
+2. Tenant Manager Service:   ```
+   cd packages/tenant-manager
+   npm install
+   npm test   ```
+
+3. Auth Service:   ```
+   cd packages/auth-service
+   npm install
+   npm test   ```
+
+4. Audit Logger Service:   ```
+   cd packages/audit-logger
+   npm install
+   npm test   ```
+
+To test the entire system:
+
+1. Ensure you have Docker and Docker Compose installed.
+2. Copy `.env.example` to `.env` and fill in the required values.
+3. Run `npm run setup` to install dependencies and build Docker images.
+4. Run `npm run start` to start all services.
+5. Use a tool like Postman or curl to test the API endpoints.
+
+## API Documentation
+
+(Include a link to your API documentation here)
+
+## Contributing
+
+(Include contribution guidelines here)
+
+## License
+
+(Include license information here)
