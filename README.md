@@ -89,14 +89,3 @@ To test the entire system:
 4. Run `npm run start` to start all services.
 5. Use a tool like Postman or curl to test the API endpoints.
 
-## API Documentation
-
-(Include a link to your API documentation here)
-
-## Contributing
-
-(Include contribution guidelines here)
-
-## License
-
-(Include license information here)
