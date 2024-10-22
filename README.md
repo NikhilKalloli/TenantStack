@@ -49,7 +49,7 @@ This integration allows each tenant to have a fully-featured content management 
 ## Setup and Installation
 
 1. Clone the repository:   ```
-   git clone https://github.com/your-username/tenantstack-hub.git
+   git clone https://github.com/NikhilKalloli/tenantstack-hub.git
    cd tenantstack-hub   ```
 
 2. Run the setup script:   ```
