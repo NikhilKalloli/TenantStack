@@ -1,12 +1,15 @@
-const Tenant = require('../../api/src/models/tenant');
-const ContentstackClient = require('contentstack');
+const Tenant = require('../models/tenant');
+const contentstack = require('@contentstack/management');
 
-const client = ContentstackClient.client();
+// Initialize the Contentstack client
+const client = contentstack.client({
+  authtoken: process.env.TENANTSTACK_CONTENTSTACK_AUTHTOKEN
+});
 
 exports.createStack = async (req, res) => {
   try {
-    const { name, description } = req.body;
-    const stack = await client.stack().create({ name, description });
+    const { name, description, master_locale } = req.body;
+    const stack = await client.stack().create({ name, description, master_locale });
     
     const tenant = new Tenant({
       tenantId: stack.api_key,
@@ -28,7 +31,8 @@ exports.updateStack = async (req, res) => {
     const { stackId } = req.params;
     const { name, description } = req.body;
     
-    await client.stack(stackId).update({ name, description });
+    const stack = client.stack({ api_key: stackId });
+    await stack.update({ name, description });
     
     const updatedTenant = await Tenant.findOneAndUpdate(
       { stackId },
@@ -46,7 +50,8 @@ exports.deleteStack = async (req, res) => {
   try {
     const { stackId } = req.params;
     
-    await client.stack(stackId).delete();
+    const stack = client.stack({ api_key: stackId });
+    await stack.delete();
     
     await Tenant.findOneAndDelete({ stackId });
     

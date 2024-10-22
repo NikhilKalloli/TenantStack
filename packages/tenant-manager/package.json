@@ -1,0 +1,11 @@
+{
+  "name": "tenantstack-tenant-manager",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "dependencies": {
+    "@contentstack/management": "^1.6.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  }
+}

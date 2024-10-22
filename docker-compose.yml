@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./packages/api
+      dockerfile: Dockerfile
+    container_name: tenantstack-api
+    ports:
+      - "${TENANTSTACK_API_PORT}:${TENANTSTACK_API_PORT}"
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+      - TENANTSTACK_API_VERSION=${TENANTSTACK_API_VERSION}
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - mongodb
+      - redis
+
+  tenant-manager:
+    build:
+      context: ./packages/tenant-manager
+      dockerfile: Dockerfile
+    container_name: tenantstack-tenant-manager
+    ports:
+      - "${TENANTSTACK_TENANT_MANAGER_PORT}:${TENANTSTACK_TENANT_MANAGER_PORT}"
+    environment:
+      - TENANTSTACK_CONTENTSTACK_API_KEY=${TENANTSTACK_CONTENTSTACK_API_KEY}
+      - TENANTSTACK_CONTENTSTACK_ACCESS_TOKEN=${TENANTSTACK_CONTENTSTACK_ACCESS_TOKEN}
+      - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      - mongodb
+
+  auth-service:
+    build:
+      context: ./packages/auth-service
+      dockerfile: Dockerfile
+    container_name: tenantstack-auth
+    ports:
+      - "${TENANTSTACK_AUTH_PORT}:${TENANTSTACK_AUTH_PORT}"
+    environment:
+      - TENANTSTACK_AUTH_SECRET=${TENANTSTACK_AUTH_SECRET}
+      - TENANTSTACK_AUTH_EXPIRES=${TENANTSTACK_AUTH_EXPIRES}
+      - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      - mongodb
+
+  audit-logger:
+    build:
+      context: ./packages/audit-logger
+      dockerfile: Dockerfile
+    container_name: tenantstack-audit
+    ports:
+      - "${TENANTSTACK_AUDIT_PORT}:${TENANTSTACK_AUDIT_PORT}"
+    environment:
+      - TENANTSTACK_AUDIT_RETENTION=${TENANTSTACK_AUDIT_RETENTION}
+      - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:4.4
+    container_name: tenantstack-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  redis:
+    image: redis:6
+    container_name: tenantstack-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  mongodb_data:

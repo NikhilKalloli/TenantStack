@@ -1,0 +1,17 @@
+{
+  "name": "tenantstack-hub",
+  "version": "1.0.0",
+  "description": "A Multi-tenant Content Management Platform using Contentstack",
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "deploy": "bash scripts/deploy.sh",
+    "start": "docker-compose up",
+    "stop": "docker-compose down",
+    "dev": "docker-compose up --build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  }
+}

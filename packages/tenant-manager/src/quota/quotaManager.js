@@ -1,4 +1,4 @@
-const Quota = require('../../api/src/models/quota');
+const Quota = require('../models/quota');
 
 exports.checkQuota = async (req, res) => {
   try {

@@ -18,9 +18,9 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/api/v1/tenants', require('./routes/tenants'));
-app.use('/api/v1/users', require('./routes/users'));
-app.use('/api/v1/quotas', require('./routes/quotas'));
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to TenantStack API' });
+});
 
 app.listen(port, () => {
   console.log(`API Service running on port ${port}`);
