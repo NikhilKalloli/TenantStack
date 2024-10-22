@@ -56,3 +56,6 @@ This integration allows each tenant to have a fully-featured content management 
    npm run setup   ```
 
 3. Update the `.env` file with your actual values.
+
+4. Start the services:   ```
+   npm run start   ```
