@@ -56,36 +56,3 @@ This integration allows each tenant to have a fully-featured content management 
    npm run setup   ```
 
 3. Update the `.env` file with your actual values.
-
-## Testing
-
-To test the individual packages:
-
-1. API Service:   ```
-   cd packages/api
-   npm install
-   npm test   ```
-
-2. Tenant Manager Service:   ```
-   cd packages/tenant-manager
-   npm install
-   npm test   ```
-
-3. Auth Service:   ```
-   cd packages/auth-service
-   npm install
-   npm test   ```
-
-4. Audit Logger Service:   ```
-   cd packages/audit-logger
-   npm install
-   npm test   ```
-
-To test the entire system:
-
-1. Ensure you have Docker and Docker Compose installed.
-2. Copy `.env.example` to `.env` and fill in the required values.
-3. Run `npm run setup` to install dependencies and build Docker images.
-4. Run `npm run start` to start all services.
-5. Use a tool like Postman or curl to test the API endpoints.
-
